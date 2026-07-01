@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المرجع الأسطوري لاختبار ستيب (STEP)</title>
+    <!-- استدعاء خط مريح للعين (Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* تصميم مخصص لمتلازمة الثلج البصري وراحة العين (VSS Friendly) */
+        :root {
+            --bg-color: #1a1a24;
+            --card-bg: #252533;
+            --text-main: #e2e2e2;
+            --text-muted: #a0a0b0;
+            --accent-blue: #4da8da;
+            --accent-gold: #f3c623;
+            --accent-red: #e94560;
+            --accent-green: #0f9675;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: 18px;
+            display: flex;
+        }
+
+        /* القائمة الجانبية */
+        .sidebar {
+            width: 280px;
+            background-color: var(--card-bg);
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            overflow-y: auto;
+            border-left: 1px solid #3a3a48;
+            padding: 20px 0;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 12px 25px;
+            border-bottom: 1px solid #3a3a48;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .sidebar a:hover {
+            background-color: #3a3a48;
+            color: var(--accent-blue);
+            padding-right: 35px;
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            margin-right: 280px;
+            padding: 40px 60px;
+            width: calc(100% - 280px);
+            box-sizing: border-box;
+        }
+
+        h1.page-title {
+            color: var(--accent-gold);
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px dashed var(--accent-gold);
+            padding-bottom: 15px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 40px;
+        }
+
+        .section-header {
+            color: var(--accent-blue);
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-right: 5px solid var(--accent-blue);
+            padding-right: 15px;
+        }
+
+        /* البطاقات */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-top: 4px solid var(--accent-blue);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent-gold);
+            border-bottom: 1px solid #3a3a48;
+            padding-bottom: 10px;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .danger {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: rgba(77, 168, 218, 0.1);
+            border-right: 4px solid var(--accent-blue);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        /* قسم الاختبار */
+        .quiz-section {
+            background-color: #1f1f2e;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-gold);
+        }
+        
+        details {
+            background-color: var(--card-bg);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            border-right: 4px solid var(--accent-gold);
+        }
+
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            outline: none;
+        }
+        
+        .answer {
+            margin-top: 15px;
+            color: var(--accent-green);
+            font-weight: bold;
+            padding-top: 10px;
+            border-top: 1px dashed #555;
+        }
+
+        /* شاشات الهواتف */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-left: none;
+            }
+            .main-content {
+                margin-right: 0;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة الجانبية -->
+    <nav class="sidebar">
+        <h2> فهرس القواعد </h2>
+        <a href="#tenses">1. الأزمنة والروابط الزمنية</a>
+        <a href="#if-wish">2. قاعدة If و Wish</a>
+        <a href="#relative-pronouns">3. ضمائر الوصل</a>
+        <a href="#pronouns">4. الضمائر وأنواعها</a>
+        <a href="#countable">5. المعدود وغير المعدود</a>
+        <a href="#adj-adv">6. الصفات والأحوال</a>
+        <a href="#comparisons">7. المقارنة والتفضيل</a>
+        <a href="#verbs-modals">8. الأفعال والأفعال الناقصة</a>
+        <a href="#conjunctions">9. أدوات الربط</a>
+        <a href="#articles">10. أدوات التعريف a/an/the</a>
+        <a href="#passive">11. المبني للمجهول</a>
+        <a href="#questions">12. تكوين الأسئلة والـ Tags</a>
+        <a href="#writing">13. مهارات الكتابة والترتيب</a>
+        <a href="#quiz" style="color: var(--accent-gold); font-weight: bold;">🎯 اختبار الشمولية العظيم</a>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <h1 class="page-title">المرجع الشامل لقواعد STEP</h1>
+
+        <!-- 1. الأزمنة والروابط الزمنية -->
+        <section id="tenses">
+            <h2 class="section-header">1. الأزمنة والروابط الزمنية</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>قاعدة التوافق الزمني</h3>
+                    <p>الجملة الجزء الأول حقها يكون بالماضي، فالجزء الثاني يظل بالماضي.</p>
+                    <p><span class="highlight">الروابط:</span> After / Before / As soon as / By the time / until <br>
+                    تستعمل بعدها <span class="highlight">had + v3</span> (إذا كان بعدها فاعل: he, she, it, they...).</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> After he <strong>had finished</strong> his work, he went home.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>روابط When / While / As</h3>
+                    <p>لو كانت الجملة ماضي وشفتهم، تستعمل بعدها <span class="highlight">was/were + verb(ing)</span>.<br>
+                    (was للمفرد، were للجمع بالماضي).<br>
+                    <span class="danger">تريكة خطيرة:</span> لو ما جاك فاعل وكان فراغ بعد الرابط الزمني مباشرة تستعمل <span class="highlight">verb + ing</span>.</p>
+                    <div class="example-box">
+                        <strong>مثال (بفاعل):</strong> While he <strong>was playing</strong>, he fell.<br>
+                        <strong>مثال (بدون فاعل):</strong> While <strong>playing</strong>, he fell.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>الروابط مع المضارع والمستقبل</h3>
+                    <p>إذا جاء رابط زمني وبعده فعل مضارع، الجزء الثاني من الجملة يكون مستقبل ويأخذ <span class="highlight">will + base form</span>.</p>
+                    <p><strong>تريكات المضارع:</strong> الفاعل المفرد نضع بآخر الفعل (s). الفاعل الجمع أو الضمائر (I, You) الفعل ينزل مصدر سادة.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> When she <strong>arrives</strong>, I <strong>will call</strong> you.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>أساسيات يجب حفظها</h3>
+                    <ul>
+                        <li><span class="highlight">has:</span> مضارع (للمفرد he, she, it)، وماضيها هو <span class="highlight">had</span>.</li>
+                        <li><span class="highlight">have:</span> مضارع (للجمع I, they, we, you).</li>
+                        <li><span class="danger">were:</span> ما يكون وراها فعل بدون إضافات أبداً!</li>
+                        <li>ظرف التكرار <span class="highlight">always</span>: إجابته تكون مضارع بسيط (سادة أو مع s للمفرد). ولا يسبقها had.</li>
+                    </ul>
+                    <div class="example-box">
+                        <strong>مثال:</strong> He <strong>always wakes</strong> up early.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. قاعدة If و Wish -->
+        <section id="if-wish">
+            <h2 class="section-header">2. قاعدة If و Wish</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>حالات If الشرطية</h3>
+                    <ul>
+                        <li>لو كان فيه مضارع تأخذ <span class="highlight">will</span> والعكس.</li>
+                        <li>لو مافي بالخيارات will ➔ تستعمل <span class="highlight">must/should/can + base form</span>.</li>
+                        <li>لو كان فيه <span class="highlight">would</span> تأخذ <span class="highlight">were</span> والعكس.</li>
+                        <li>لو كان فيه <span class="highlight">had</span> تأخذ <span class="highlight">would have</span>.</li>
+                        <li><span class="danger">فخ الإفراد:</span> If دائماً مع were، ولا تأخذ was أبداً حتى لو الفاعل مفرد.</li>
+                        <li>لو ما كان فيه were، تأخذ الماضي البسيط <span class="highlight">V2</span>.</li>
+                    </ul>
+                    <div class="example-box">
+                        <strong>مثال:</strong> If I <strong>were</strong> a doctor, I <strong>would</strong> help you.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>قاعدة Wish / If only</h3>
+                    <p>الإجابة تكون <span class="highlight">were</span> أو <span class="highlight">had</span>.<br>
+                    لو جاك بالخيارات were مع had، القاعدة أن: <br>
+                    <strong>were</strong> للحاضر / <strong>had (V3)</strong> للماضي.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> I wish I <strong>were</strong> rich now.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ضمائر الوصل -->
+        <section id="relative-pronouns">
+            <h2 class="section-header">3. ضمائر الوصل (Relative Pronouns)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Who / Whom / Whose</h3>
+                    <p><strong>Who:</strong> للوصل (قبل الفراغ شخص وبعد الفراغ فعل). في الاستفهام (من؟ للعاقل). <br>
+                    <span class="highlight">تريكة:</span> لو الاثنين موجودين بالخيارات حط who، ولو ما كانوا الاثنين موجودين استعمل that.</p>
+                    <p><strong>Whom:</strong> <span class="highlight">استثناء:</span> لو كان فيه with تدمجه مع whom وتصير <strong>with whom</strong>.</p>
+                    <p><strong>Whose:</strong> للوصل (قبلها مالك وبعدها مملوك، اسم بدون أفعال أو ضمائر). في الاستفهام (ملك من/حق مين).</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> The man <strong>who</strong> is driving is my dad.<br>
+                        The boy <strong>whose</strong> bag is lost is crying.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Which / What / That</h3>
+                    <p><strong>Which:</strong> للوصل (قبل الفراغ شيء غير عاقل أو مكان). في الاستفهام (أي؟ للتخيير) وتدل عليها كلمات <span class="highlight">one / recommend</span>.</p>
+                    <p><strong>What:</strong> للوصل (لما يكون قبلها فعل مب اسم زي الباقيين). في الاستفهام (ماذا؟).</p>
+                    <p><strong>That:</strong> <span class="highlight">استثناء:</span> لو كان قبل الفراغ كلمة all، تستعمل الوصل that.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> Tell me <strong>what</strong> happened.<br>
+                        All <strong>that</strong> glitters is not gold.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. الضمائر -->
+        <section id="pronouns">
+            <h2 class="section-header">4. الضمائر (Pronouns)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>مواقع الضمائر الأساسية</h3>
+                    <ul>
+                        <li><strong>الفاعل (Subject):</strong> أول الجملة قبل الفعل (I, He, She, It, We, You, They).</li>
+                        <li><strong>المفعول (Object):</strong> بعد الفعل أو حرف الجر على طول (me, him, her, it, us, you, them).</li>
+                        <li><strong>صفات الملكية (Poss. Adj):</strong> مستحيل تكون لحالها لازم يجي بعدها الشيء المملوك (my, his, her, its, our, your, their).</li>
+                        <li><strong>ضمائر الملكية (Possessive):</strong> نهاية الكلام، مستحيل يجي بعدها اسم، وغالباً بعدها نقطة (mine, his, hers, ours, yours, theirs).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>الضمائر المنعكسة (Reflexive)</h3>
+                    <p>تنتهي بـ self للمفرد و selves للجمع. وغالباً يجي قبلها حرف الجر by.</p>
+                    <p><span class="highlight">أفعال ترتد على الفاعل:</span> (لو مافي مفعول به ثاني) ➔ hurt, enjoy, cut, introduce, look after, blame.</p>
+                    <p><span class="danger">تريكة:</span> لو جاك (both of you) أو (you all) تستعمل <strong>yourselves</strong>.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> He cut <strong>himself</strong>.<br>
+                        Both of you must protect <strong>yourselves</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. المعدود وغير المعدود -->
+        <section id="countable">
+            <h2 class="section-header">5. المعدود وغير المعدود</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>المعدود (Countable)</h3>
+                    <p>أشياء تنعد بالجمع ونضيف لها s. <br>
+                    المفرد يأخذ (a/an) وفعل (is/was). والجمع يأخذ فعل (are/were).</p>
+                    <p><strong>كلمات القلة والكثرة:</strong> many للكثير / a few للقليل. (too many للكثرة المفرطة).</p>
+                    <p><span class="danger">شواذ الجمع (بدون s وتأخذ are/have):</span> people, children, men, women.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> I have <strong>a few</strong> cars.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>الغير معدود (Uncountable)</h3>
+                    <p>أشياء ما تنعد (سوائل، غازات، مفاهيم). لا ينضاف لها s وتعامل <strong>معاملة المفرد</strong> وتأخذ (is, has, was، وفعل ينتهي بـ s).</p>
+                    <p><strong>كلمات القلة والكثرة:</strong> much للكثير / a little للقليل. (too much للكثرة المفرطة).</p>
+                    <p><span class="danger">كلمات فخ تعتبر غير معدود:</span> money, information, advice, news, homework, furniture, traffic, cash, time.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> Water <strong>is</strong> important.<br>
+                        The news <strong>is</strong> good.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>مشتركات وتريكات الفراغ</h3>
+                    <ul>
+                        <li><span class="highlight">some:</span> بالجمل الإيجابية المثبتة.</li>
+                        <li><span class="highlight">any:</span> في الجمل المنفية والأسئلة.</li>
+                        <li><span class="highlight">a lot of:</span> تجي مع الاثنين.</li>
+                        <li><span class="highlight">only:</span> لو شفتها قبل الفراغ بخيارات القلة ➔ تختار <strong>a few</strong> (أو a little).</li>
+                        <li><span class="highlight">as...as:</span> لو شفت a...as تحط بالفراغ <strong>much</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. الصفات والأحوال -->
+        <section id="adj-adv">
+            <h2 class="section-header">6. الصفات والأحوال (Adj & Adv)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>الصفة (Adjective)</h3>
+                    <p>توصف شخص أو شيء (اسم مب فعل).<br>
+                    <strong>مكانها:</strong> قبل الاسم أو بعد أفعال الكينونة (am, is, are, was, were, be, been).</p>
+                    <p>لو كان فيه اسم وبعده فراغ أو أفعال كينونة، تحط الصفة سادة بدون ly.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> He is a <strong>smart</strong> boy.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>الحال (Adverb)</h3>
+                    <p>يوصف الفعل وطريقة حدوثه.<br>
+                    <strong>ميزته:</strong> تضيف ly لآخر الصفة. لو كان فعل وبعده فراغ تضيف ly.</p>
+                    <p><span class="danger">شواذ لا تأخذ ly:</span> good تصير well / fast / hard.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> He speaks <strong>slowly</strong>.<br>
+                        He plays <strong>well</strong>.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>أفعال الحواس (Sense Verbs)</h3>
+                    <p>الأفعال: look, feel, smell, taste, sound, seem.<br>
+                    الصفة الي تيجي بعدهم <strong>ثابتة بدون إضافات</strong> ولا نضيف ly، وحتى good ما تصير well فقط بعد أفعال الحواس.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> You look <strong>good</strong> today.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. المقارنة والتفضيل -->
+        <section id="comparisons">
+            <h2 class="section-header">7. المقارنة والتفضيل</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>المقارنة بين اثنين (Comparative)</h3>
+                    <p>المغناطيس: كلمة <span class="highlight">than</span> بعد الفراغ.<br>
+                    - صفة قصيرة: تضيف er (taller).<br>
+                    - صفة طويلة: تحط قبلها more/less (more intelligent).</p>
+                    <p><span class="danger">شواذ المقارنة:</span> good ➔ better than | bad ➔ worse than.</p>
+                </div>
+                <div class="card">
+                    <h3>التفضيل (Superlative)</h3>
+                    <p>المغناطيس: كلمة <span class="highlight">the</span> قبل الفراغ.<br>
+                    - صفة قصيرة: تضيف est (the tallest).<br>
+                    - صفة طويلة: تضيف the most / the least.</p>
+                    <p><span class="danger">شواذ التفضيل:</span> good ➔ the best | bad ➔ the worst.</p>
+                    <p><span class="highlight">تريكة النهاية:</span> لو ما كان فيه the/than وتروح لآخر الجملة وتلقى (of all / ever) ➔ تفضيل فوراً.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. الأفعال والمقاصد -->
+        <section id="verbs-modals">
+            <h2 class="section-header">8. قواعد الأفعال و Modals</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>الفعل المصدر السادة</h3>
+                    <p>إذا شفت الكلمات دي قبل الفراغ تختار المصدر (بدون إضافات):<br>
+                    Do, Does, Did, don't, doesn't, didn't.<br>
+                    Modals: will/won't, can/can't, should/shouldn't, could/couldn't, would/wouldn't, must/mustn't, may/might.<br>
+                    <span class="highlight">وأيضاً:</span> make/made, let/let's, had better.</p>
+                </div>
+                <div class="card">
+                    <h3>أفعال To والمصدر / أفعال ing</h3>
+                    <p><strong>كلمتين (to + مصدر):</strong> want, decide, need, offer, promise, refuse, agree, seem, ask, tell, hope.<br>
+                    - it's + صفة ➔ to + مصدر<br>
+                    - صفة + enough ➔ to + مصدر<br>
+                    - too + صفة ➔ to + مصدر</p>
+                    <p><strong>فعل مضاف له ing:</strong> go, avoid, mind, enjoy, like, love, keep, try, finish, decide against.<br>
+                    <span class="danger">تريكة:</span> أي حرف جر غير to (in, on, at, of, for, with, about, from, up) يكون بعده verb+ing.</p>
+                </div>
+                <div class="card">
+                    <h3>المقاصد وتريكاتها (Modals)</h3>
+                    <ul>
+                        <li><span class="highlight">الفرق بين must و have to:</span> كلهم للإلزام، بس must مافي to بعدها، بينما have لازم يكون فيه to بعدها.</li>
+                        <li><strong>الرغبة:</strong> (like, want, prefer) الحل غالباً may/might.</li>
+                        <li><strong>الطلب المهذب:</strong> (please, like, actually) الحل would.</li>
+                        <li><strong>قاعدة النسف But:</strong> إذا شفت but بعدها نفي ➔ تستعمل <strong>could have + v3</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. أدوات الربط -->
+        <section id="conjunctions">
+            <h2 class="section-header">9. أدوات الربط والتوافق</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>روابط المعنى الدقيق</h3>
+                    <ul>
+                        <li><strong>via:</strong> من خلال أو عن طريق. | <strong>beyond:</strong> أبعد من / بعد.</li>
+                        <li><strong>provided that:</strong> طالما. | <strong>until:</strong> حتى.</li>
+                        <li><strong>for example:</strong> على سبيل المثال.</li>
+                        <li><strong>in addition / moreover:</strong> إضافة إلى ذلك / للإضافة.</li>
+                        <li><strong>therefore:</strong> لذلك (للنتيجة).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>السبب، النتيجة، التناقض</h3>
+                    <ul>
+                        <li><strong>because:</strong> يربط الحدث بسببه، وبعده فعل وفاعل.</li>
+                        <li><strong>so:</strong> للنتيجة، ويجي قبلها فاصلة.</li>
+                        <li><strong>but:</strong> لازم عشان تستعملها يكون قبلها فاصلة.</li>
+                        <li><strong>however:</strong> الرابط الوحيد الي يكون بين نقطة وفاصلة (;) ليدل على التناقض. الفاصلة تيجي بعدها.</li>
+                        <li><strong>Although / Even though:</strong> غالباً بداية الجملة ولا تلتصق بها فاصلة مباشرة.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>الغرض والنسف المزدوج وقاعدة And</h3>
+                    <ul>
+                        <li><strong>الغرض:</strong> لو الفراغ بعده مصدر سادة ➔ in order to / to.<br>
+                        لو بعد الفراغ فاعل (I, he, she...) ➔ تستعمل <strong>so that</strong>.</li>
+                        <li><strong>neither:</strong> دائماً تأخذ <strong>nor</strong>. غالباً بأول الجملة وبعدها neither of واسم. <span class="danger">وما ينفع تحطها بجملة نفي لأنها نفي أصلاً.</span></li>
+                        <li><strong>either:</strong> دائماً تأخذ <strong>or</strong>. لو فيه or تيجي بأول الجملة، لو مافيها تيجي بآخر الجملة المنفية.</li>
+                        <li><span class="danger">قاعدة AND:</span> لو جاك فراغ بعد and وطالب فعل، تستعمل نفس صيغة الفعل اللي قبلها (ing ➔ ing / ed ➔ ed).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. حروف الجر والأدوات -->
+        <section id="articles">
+            <h2 class="section-header">10. أدوات التعريف وحروف الجر</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>أدوات التعريف a / an / the</h3>
+                    <p><strong>a/an:</strong> تنحط قبل الاسم المفرد لوصف وظيفة أو عمل. (an للكلمات اللي تبدأ بـ a-e-i-o-u)، (a لباقي الحروف).</p>
+                    <p><strong>the:</strong> لشيء واحد مافي غيره (the sun) أو للتعريف.</p>
+                    <p><span class="danger">بدون أداة نهائياً:</span> الوجبات (breakfast, lunch, dinner)، اللغات (Arabic, German)، وكلمات مثل fresh air / education.</p>
+                </div>
+                <div class="card">
+                    <h3>حروف الجر للوقت والمكان</h3>
+                    <p><strong>in:</strong> فترات اليوم، شهور السنة، السنوات، القرون، الدول، المدن.</p>
+                    <p><strong>on:</strong> أيام الأسبوع، التواريخ، street, way, road.</p>
+                    <p><strong>at:</strong> للساعات، home, work, university.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. المبني للمجهول -->
+        <section id="passive">
+            <h2 class="section-header">11. المبني للمجهول (Passive)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>معادلات Passive (تبدأ بالمفعول + V3 إجباري)</h3>
+                    <ul>
+                        <li><strong>is/are + V3:</strong> لحقيقة ثابتة. (Many cars are made in Japan).</li>
+                        <li><strong>was/were + V3:</strong> لشيء انتهى بالماضي. (Problems were caused by smoking).</li>
+                        <li><strong>is/are/was/were + being + V3:</strong> لما يكون مستمر أو يحدث الآن. (The car is being washed right now).</li>
+                        <li><strong>have/has/had + been + V3:</strong> أول ما تشوف وحدة منهم لازم تختار been أو العكس.</li>
+                        <li><strong>modals + be + V3:</strong> تحط be سادة بعدها V3.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. الأسئلة -->
+        <section id="questions">
+            <h2 class="section-header">12. تكوين الأسئلة والـ Tags</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>السؤال المباشر وغير المباشر</h3>
+                    <p><strong>المباشر:</strong> (do/does/did ➔ مصدر)، (is/are/was/were ➔ ing)، (have/has/had ➔ V3)، (will/would/can/could ➔ مصدر). <span class="highlight">الفعل قبل الفاعل.</span></p>
+                    <p><strong>غير المباشر:</strong> الاستفهام بمنتصف الجملة. <span class="highlight">الفاعل قبل الفعل.</span> مافي علامة استفهام، وما يكون فيه do/does/did.</p>
+                </div>
+                <div class="card">
+                    <h3>السؤال المذيل (Question Tag)</h3>
+                    <p>بنهاية الجملة للتأكيد، ولازم قبله فاصلة (,).<br>
+                    <strong>السر:</strong> تمسك أول كلمتين وتعكسهم. لو كانت مثبتة تنفيها والعكس.</p>
+                    <div class="example-box">
+                        <strong>مثال:</strong> She has traveled to Paris, <strong>hasn't she?</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. الكتابة -->
+        <section id="writing">
+            <h2 class="section-header">13. مهارات الكتابة (Writing Analysis)</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Capitalization (الحروف الكبيرة)</h3>
+                    <p>أول حرف كابيتال في: 1. أسماء الأشخاص (Ali) | 2. الشوارع (King Fahd Road) | 3. المؤسسات/المساجد (King Khalid Mosque) | 4. الأماكن قارات ومدن (Asia) | 5. المناطق (Middle East) | 6. اللغات | 7. الجنسيات | 8. الكواكب | 9. الديانات | 10. أيام وأشهر | 11. الألقاب (Dr.) | 12. الاختصارات (K.S.A) | 13. الضمير I في أي مكان | 14. أول حرف بالجملة.</p>
+                </div>
+                <div class="card">
+                    <h3>Punctuation (علامات الترقيم)</h3>
+                    <p>(.) نهاية الجملة | (?) نهاية السؤال | (!) للتعجب | (:) بعد كلمة include وقبل التفصيل.<br>
+                    (') الفاصلة العلوية للاختصار (doesn't) أو s الملكية (Ali's).<br>
+                    (,) لتعديد أكثر من اثنين، وقبل ,but/,so، وتوضع قبل الفاعل في الجملة الثانية المبدوءة بأداة ربط.<br>
+                    ("") للكلام المقتبس | (;) تيجي قبل however.</p>
+                </div>
+                <div class="card">
+                    <h3>Correct Word Order (ترتيب الكلمات والفقرات)</h3>
+                    <p><strong>ترتيب الجملة:</strong> فاعل ➔ فعل ➔ مفعول. <br>
+                    لو فيه مكان وزمان: <span class="highlight">المكان أول بعده زمان بالنهاية.</span><br>
+                    ظروف التكرار (always, usually...) تجي قبل الفعل الأساسي وبعد الفاعل.<br>
+                    <span class="danger">تريكة:</span> لو شفت both بالخيارات تكون هي الإجابة.</p>
+                    <p><strong>ترتيب البراجراف:</strong> تبدأ بالاسم المعلوم. بعدها First ➔ then/next. وجملة eventually/finally تكون النهاية. <br>
+                    <span class="danger">لا تبدأ بمجهول (ضمير) ما لم ينب عن اسم.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. الاختبار -->
+        <section id="quiz">
+            <h2 class="section-header" style="color: var(--accent-gold); border-color: var(--accent-gold);">🎯 اختبار الشمولية العظيم</h2>
+            <div class="quiz-section">
+                <p style="text-align: center; margin-bottom: 30px;">حاول الإجابة بنفسك قبل فتح السهم لرؤية الحل والسبب المستخلص من القواعد أعلاه.</p>
+
+                <details>
+                    <summary>1. After he ________ his work, he went home.</summary>
+                    <div class="answer">
+                        الحل: <strong>had finished</strong><br>
+                        السبب: رابط After وبعده فاعل في جملة ماضية يأخذ had + V3.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>2. While ________ football, he fell.</summary>
+                    <div class="answer">
+                        الحل: <strong>playing</strong><br>
+                        السبب: رابط While جاء بعده الفراغ مباشرة (بدون فاعل)، فنختار V+ing.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>3. When she ________, I will call you.</summary>
+                    <div class="answer">
+                        الحل: <strong>arrives</strong><br>
+                        السبب: الجزء الثاني مستقبل (will)، فالجزء الأول مع الرابط يكون مضارع بسيط مع s المفرد.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>4. If I ________ a bird, I would fly.</summary>
+                    <div class="answer">
+                        الحل: <strong>were</strong><br>
+                        السبب: قاعدة If المستحيلة تأخذ always were ولا تأخذ was أبداً.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>5. The man ________ is driving is my dad.</summary>
+                    <div class="answer">
+                        الحل: <strong>who</strong><br>
+                        السبب: قبله شخص عاقل وبعده فعل (is).
+                    </div>
+                </details>
+
+                <details>
+                    <summary>6. She cut ________ while cooking.</summary>
+                    <div class="answer">
+                        الحل: <strong>herself</strong><br>
+                        السبب: فعل منعكس (cut) يرتد على الفاعل لعدم وجود مفعول به آخر.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>7. I have only ________ cars.</summary>
+                    <div class="answer">
+                        الحل: <strong>a few</strong><br>
+                        السبب: cars معدود، وسبقتها only، فنأخذ القلة المعدودة.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>8. The news ________ very bad today.</summary>
+                    <div class="answer">
+                        الحل: <strong>is</strong><br>
+                        السبب: كلمة news تعتبر غير معدود وتعامل معاملة المفرد.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>9. He speaks English ________.</summary>
+                    <div class="answer">
+                        الحل: <strong>well</strong><br>
+                        السبب: نوصف فعل التحدث (حال)، وشاذة good هي well.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>10. I could have passed the exam, ________ I didn't study.</summary>
+                    <div class="answer">
+                        الحل: <strong>but</strong><br>
+                        السبب: قاعدة النسف المزدوج (could have + v3) تأتي مع but والجملة المنفية.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>11. He likes swimming and ________ football.</summary>
+                    <div class="answer">
+                        الحل: <strong>playing</strong><br>
+                        السبب: قاعدة and توحد الصيغة، قبلها ing فبعدها ing.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>12. I want to go to university ________ get a good job.</summary>
+                    <div class="answer">
+                        الحل: <strong>in order to</strong><br>
+                        السبب: لبيان الغرض وبعده فعل مصدر سادة.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>13. Neither Ali ________ Ahmed is here.</summary>
+                    <div class="answer">
+                        الحل: <strong>nor</strong><br>
+                        السبب: Neither صديقتها الثابتة دائماً هي nor.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>14. The car ________ washed right now.</summary>
+                    <div class="answer">
+                        الحل: <strong>is being</strong><br>
+                        السبب: مبني للمجهول ومستمر (now)، نضع is being + v3.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>15. She has traveled to Paris, ________?</summary>
+                    <div class="answer">
+                        الحل: <strong>hasn't she?</strong><br>
+                        السبب: سؤال مذيل، نعكس أول كلمتين وننفي الإثبات.
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
